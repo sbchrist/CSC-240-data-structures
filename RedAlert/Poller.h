@@ -1,12 +1,13 @@
 //============================================================================
 // Description : Header for fault Poller sim (Inherit PQType)
 // Author      : Alan Angell
-// Version     : 05/07/2021
+// Version     : 05/10/2021
 //============================================================================
 #ifndef POLLERTYPE_H
 #define POLLERTYPE_H
 #include "PQType.h"
 #include <string>
+
 template <class ItemType>
 class Poller: public PQType<ItemType>{
 public: Poller(int);

@@ -37,7 +37,7 @@ Node::Node() {
   priority = 0;
 }
 
-Node::Node(string n, bool d, int a = 0, int p = 0) {
+Node::Node(string n, bool d = false, int p = 0, int a = 0) {
   name = n;
   down = d;
   age = a;
