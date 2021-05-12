@@ -15,13 +15,14 @@ public:
   void decrementAge();
   void incrementAge();
   int getPriority() const;
-  bool getLink();
-  void setLink(bool status);
+  bool getStatus();
+  void setStatus(bool status);
   friend ostream& operator<<(ostream& out, const Node& j);
   bool operator<(Node otherNode);
   bool operator>(Node otherNode);
   bool operator==(Node otherNode);
   bool operator<=(Node otherNode);
+  Node* operator=(Node otherNode);
 private:
   string name;
   int age;
@@ -41,7 +42,10 @@ Node::Node(string n, bool d = false, int p = 0, int a = 0) {
   name = n;
   down = d;
   age = a;
-  priority = p;
+  if(p > 2 || p < 0){
+	  priority = 0;
+  }else
+	  priority=p;
 }
 
 int Node::getAge() const {
@@ -49,7 +53,9 @@ int Node::getAge() const {
 }
 
 void Node::decrementAge() {
-  age--;
+	//nxe Check to not reduce age below 0
+	if(age > 0)
+		age--;
 }
 
 void Node::incrementAge() {
@@ -60,11 +66,11 @@ int Node::getPriority() const {
   return priority;
 }
 
-bool Node::getLink(){
+bool Node::getStatus(){
   return down;
 }
 
-void Node::setLink(bool status){
+void Node::setStatus(bool status){
   down = status;
 }
 
@@ -101,6 +107,14 @@ bool Node::operator<=(Node otherNode) {
     return true;
   else
     return false;
+}
+
+
+Node* Node::operator=(Node otherNode) {
+  this->priority=otherNode.priority;
+  this->age=otherNode.age;
+  this->name=otherNode.name;
+  this->down=otherNode.down;
 }
 
 #endif
