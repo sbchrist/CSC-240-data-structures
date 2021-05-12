@@ -1,106 +1,50 @@
 //============================================================================
-// Description : Header for Node <ItemType> for Poller Type
+// Description : Test Driver for RedAlert program for auditing/alerting
 // Author      : Alan Angell
-// Version     : 05/07/2021
+// Version     : 05/12/2021
+// License     : MIT License type free use
 //============================================================================
-#ifndef NODETYPE_H
-#define NODETYPE_H
 
-class Node
-{
-public:
-  Node();
-  Node(string, bool, int, int);
-  int getAge() const;
-  void decrementAge();
-  void incrementAge();
-  int getPriority() const;
-  bool getLink();
-  void setLink(bool status);
-  friend ostream& operator<<(ostream& out, const Node& j);
-  bool operator<(Node otherNode);
-  bool operator>(Node otherNode);
-  bool operator==(Node otherNode);
-  bool operator<=(Node otherNode);
-private:
-  string name;
-  int age;
-  int priority;
-  bool down;
-};
+#include <iostream>
+#include <fstream>
+#include "Poller.h"
+#include "NodeType.h"
+using namespace std;
 
+const int MAX_SERVERS = 100;
 
-Node::Node() {
-  name = "default";
-  down = false;
-  age = 0;
-  priority = 0;
+int main() {
+	// Build golden config from file
+	// Build cluster BST with in data
+  // Poll nodes for deltas
+	// Alerts
+	ifstream inFile;
+	inFile.open("inData.txt");
+	string nodeName;
+	bool isDown;
+	int priorityNode;
+	Poller<Node> cluster(MAX_SERVERS);
+
+  while (inFile){
+		inFile >> nodeName >> isDown >> priorityNode;
+	  	Node tmp = new Node(nodeName, isDown, priorityNode);
+		cluster.addNode(tmp);
+	}
+	cluster.removeNode(tmp);
+
+	cout << tmp << endl;
+
+	// Prompt user to start Poller
+  // Poller runs until user input to stop
+	// Periodic alerts/prompts for user action
+	//  choice: ACK, SNOOZE, CLEAR
+	//          each choice has action in driver
+
+	//Step 1:
+	//Step 2: Get top node in priority and give option to kill
+	//			If user chooses yes, remove node
+	//			If not, queue it into
+	//Step 3:
+  inFile.close();
+	return 0;
 }
-
-Node::Node(string n, bool d = false, int p = 0, int a = 0) {
-  name = n;
-  down = d;
-  age = a;
-  priority = p;
-}
-
-int Node::getAge() const {
-  return age;
-}
-
-void Node::decrementAge() {
-  age--;
-}
-
-void Node::incrementAge() {
-  age++;
-}
-
-int Node::getPriority() const {
-  return priority;
-}
-
-bool Node::getLink(){
-  return down;
-}
-
-void Node::setLink(bool status){
-  down = status;
-}
-
-ostream& operator<<(ostream& out, const Node& n) {
-  out << "Name: " << n.name << endl;
-  out << "Age: " << n.age << endl;
-  out << "Priority: " << n.priority << endl;
-  return out;
-}
-
-bool Node::operator<(Node otherNode) {
-  if (this->priority < otherNode.priority)
-    return true;
-  else
-    return false;
-}
-
-bool Node::operator>(Node otherNode) {
-  if (this->priority > otherNode.priority)
-    return true;
-  else
-    return false;
-}
-
-bool Node::operator==(Node otherNode) {
-  if (this->priority == otherNode.priority)
-    return true;
-  else
-    return false;
-}
-
-bool Node::operator<=(Node otherNode) {
-  if (this->priority <= otherNode.priority)
-    return true;
-  else
-    return false;
-}
-
-#endif
