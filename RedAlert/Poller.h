@@ -16,8 +16,6 @@ public: Poller(int);
   void setCurrentNode(ItemType&);
   void addNode(ItemType&);
   void removeNode(ItemType& n);
-
-  void BuildGolden();
   bool CheckNode();
   // Function: Check link status of highest priority (next) node
   // Pre: currentNode is initialized
@@ -71,13 +69,8 @@ void Poller<ItemType>::removeNode(ItemType& n){
 }
 
 template <class ItemType>
-void Poller<ItemType>::BuildGolden(){
-
-}
-
-template <class ItemType>
 bool Poller<ItemType>::CheckNode(){
-  return currentNode.getLink();
+  return currentNode.getStatus();
 }
 
 template <class ItemType>
@@ -91,7 +84,8 @@ void Poller<ItemType>::SendAlert(){
 
 template <class ItemType>
 void Poller<ItemType>::PollNodes(){
-
+//Pre: Heap is initialized
+//Post:
 }
 
 #endif
