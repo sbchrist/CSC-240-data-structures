@@ -15,7 +15,7 @@ public:
   void decrementAge();
   void incrementAge();
   int getPriority() const;
-  bool getLink();
+  bool getStatus();
   void setLink(bool status);
   friend ostream& operator<<(ostream& out, const Node& j);
   bool operator<(Node otherNode);
@@ -37,7 +37,7 @@ Node::Node() {
   priority = 0;
 }
 
-Node::Node(string n, bool d, int a = 0, int p = 0) {
+Node::Node(string n, bool d = false, int p = 0, int a = 0) {
   name = n;
   down = d;
   age = a;
@@ -60,7 +60,7 @@ int Node::getPriority() const {
   return priority;
 }
 
-bool Node::getLink(){
+bool Node::getStatus(){
   return down;
 }
 

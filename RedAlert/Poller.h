@@ -1,12 +1,13 @@
 //============================================================================
 // Description : Header for fault Poller sim (Inherit PQType)
 // Author      : Alan Angell
-// Version     : 05/07/2021
+// Version     : 05/10/2021
 //============================================================================
 #ifndef POLLERTYPE_H
 #define POLLERTYPE_H
 #include "PQType.h"
 #include <string>
+
 template <class ItemType>
 class Poller: public PQType<ItemType>{
 public: Poller(int);
@@ -15,18 +16,16 @@ public: Poller(int);
   void setCurrentNode(ItemType&);
   void addNode(ItemType&);
   void removeNode(ItemType& n);
-
-  void BuildGolden();
   bool CheckNode();
   // Function: Check link status of highest priority (next) node
   // Pre: currentNode is initialized
   // Post: function value is bool LinkStatus();
   void SendAlert();
+  // Function:
   void PollNodes();
 private:
   int numNodes;
   ItemType currentNode;
-  HeapType<ItemType> golden;
 };
 
 
@@ -70,13 +69,8 @@ void Poller<ItemType>::removeNode(ItemType& n){
 }
 
 template <class ItemType>
-void Poller<ItemType>::BuildGolden(){
-
-}
-
-template <class ItemType>
 bool Poller<ItemType>::CheckNode(){
-  return currentNode.getLink();
+  return currentNode.getStatus();
 }
 
 template <class ItemType>
@@ -90,7 +84,8 @@ void Poller<ItemType>::SendAlert(){
 
 template <class ItemType>
 void Poller<ItemType>::PollNodes(){
-
+//Pre: Heap is initialized
+//Post:
 }
 
 #endif
