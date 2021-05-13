@@ -1,91 +1,92 @@
 //============================================================================
 // Description : Header for fault Poller sim (Inherit PQType)
 // Author      : Alan Angell
-// Version     : 05/10/2021
+// Version     : 05/13/2021
+// License     : Only for CSC240 Oakton College
 //============================================================================
 #ifndef POLLERTYPE_H
 #define POLLERTYPE_H
-#include "PQType.h"
 #include <string>
+#include "PQType.h"
+#include "NodeType.h"
 
-template <class ItemType>
-class Poller: public PQType<ItemType>{
+class Poller: public PQType<Node>{
 public: Poller(int);
   int getNumNodes() const;
-  void getCurrentNode(ItemType&);
-  void setCurrentNode(ItemType&);
-  void addNode(ItemType&);
-  void removeNode(ItemType& n);
+  void getCurrentNode(Node&);
+  void setCurrentNode(Node&);
+  void addNode(Node&);
+  void removeNode(Node& n);
   bool CheckNode();
   // Function: Check link status of highest priority (next) node
   // Pre: currentNode is initialized
-  // Post: function value is bool LinkStatus();
+  // Post: function value is bool getStatus();
   void SendAlert();
-  // Function:
+  // Function: Check node and print alert based on priority
+  // Pre: Node is initialized
+  // Post: Alert is printed to screen
   void PollNodes();
+  void AgeNodes();
+  // Function: To access the AgeItems function of the superclass PQType<Node>
+  // Pre: PQType has function AgeItems defined for incresaing Node age value
+  // Post: Every node in PQ has age increased by 1
 private:
   int numNodes;
-  ItemType currentNode;
+  Node currentNode;
 };
 
 
-template <class ItemType>
-Poller<ItemType>::Poller(int size) : PQType<ItemType>(size){
+Poller::Poller(int size) : PQType<Node>(size){
   numNodes = 0;
 }
 
-template <class ItemType>
-int Poller<ItemType>::getNumNodes() const{
+int Poller::getNumNodes() const{
   return numNodes;
 }
 
-template <class ItemType>
-void Poller<ItemType>::getCurrentNode(ItemType& n){
+void Poller::getCurrentNode(Node& n){
   n = currentNode;
 }
 
-template <class ItemType>
-void Poller<ItemType>::setCurrentNode(ItemType& n){
-// copy Node (member-wise?) into currentNode;
+void Poller::setCurrentNode(Node& n){
   currentNode = n;
 }
 
-template <class ItemType>
-void Poller<ItemType>::addNode(ItemType& n){
-// enq ItemType into the PQ (heap)
-  PQType<ItemType>::Enqueue(n);
+void Poller::addNode(Node& n){
+// enq Node into the PQ (heap)
+  PQType<Node>::Enqueue(n);
 // increment numNodes
   numNodes++;
 }
 
-template <class ItemType>
-void Poller<ItemType>::removeNode(ItemType& n){
-// deq ItemType from the PQ (heap)
-  PQType<ItemType>::Dequeue(n);
+void Poller::removeNode(Node& n){
+// deq Node from the PQ (heap)
+  PQType<Node>::Dequeue(n);
 // add the Node to the schedule
   setCurrentNode(n);
 // decrement numNodes
   numNodes--;
 }
 
-template <class ItemType>
-bool Poller<ItemType>::CheckNode(){
+bool Poller::CheckNode(){
   return currentNode.getStatus();
 }
 
-template <class ItemType>
-void Poller<ItemType>::SendAlert(){
+void Poller::SendAlert(){
   if (CheckNode()){
     string sev[3] = {"Blue Alert!", "Yellow Alert!!", "Red Alert!!!"};
     int p = currentNode.getPriority();
     cout << sev[p] << endl;
+    cout << currentNode << endl;
   }
 }
 
-template <class ItemType>
-void Poller<ItemType>::PollNodes(){
-//Pre: Heap is initialized
-//Post:
+void Poller::AgeNodes(){
+  PQType<Node>::AgeItems();
+}
+
+void Poller::PollNodes(){
+
 }
 
 #endif

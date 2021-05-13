@@ -40,6 +40,10 @@ public:
   // Post: If (the priority queue is empty) exception EmptyPQ is thrown;
   //       else highest priority element has been removed from queue.
   //       item is a copy of removed element.
+  void AgeItems();
+  // Function: Increment age value for all items in the Heap
+  // Pre: Heap is initialized with NodeType at least one
+  // Post: All Nodes have age increased by one
   template <class ItemPQ>
   friend ostream& operator<<(ostream& out, const PQType<ItemPQ>& pq);
 private:
@@ -138,6 +142,12 @@ bool PQType<ItemType>::IsEmpty() const
 // Post: Returns true if the queue is empty; false, otherwise.
 {
   return length == 0;
+}
+
+template<class ItemType>
+void PQType<ItemType>::AgeItems(){
+  for (int i = 0; i < length; i++)
+    items.elements[i].incrementAge();
 }
 
 template <class ItemPQ>

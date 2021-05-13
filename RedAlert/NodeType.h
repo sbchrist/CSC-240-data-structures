@@ -70,35 +70,48 @@ void Node::setLink(bool status){
 
 ostream& operator<<(ostream& out, const Node& n) {
   out << "Name: " << n.name << endl;
-  out << "Age: " << n.age << endl;
   out << "Priority: " << n.priority << endl;
+  out << "Age: " << n.age << endl;
   return out;
 }
 
 bool Node::operator<(Node otherNode) {
-  if (this->priority < otherNode.priority)
-    return true;
+  if (this->priority < otherNode.priority){
+    if (this->age > otherNode.age)
+      return false;
+    else
+      return true;
+  }
   else
     return false;
 }
 
 bool Node::operator>(Node otherNode) {
-  if (this->priority > otherNode.priority)
-    return true;
+  if (this->priority > otherNode.priority){
+    if (this->age < otherNode.age)
+      return false;
+    else
+      return true;
+  }
   else
     return false;
 }
 
 bool Node::operator==(Node otherNode) {
-  if (this->priority == otherNode.priority)
+  if (this->priority == otherNode.priority &&
+      this->age == otherNode.age)
     return true;
   else
     return false;
 }
 
 bool Node::operator<=(Node otherNode) {
-  if (this->priority <= otherNode.priority)
-    return true;
+  if (this->priority <= otherNode.priority){
+    if (this->age > otherNode.age)
+      return false;
+    else
+      return true;
+  }
   else
     return false;
 }
