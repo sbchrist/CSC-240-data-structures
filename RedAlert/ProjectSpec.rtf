@@ -1,0 +1,70 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Bold;\f1\fnil\fcharset0 HelveticaNeue;\f2\fnil\fcharset0 HelveticaNeue-Italic;
+\f3\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red26\green200\blue125;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c81020\c56302;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs22 \cf2 RedAlert Program\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0 \cf2 \
+    This program assists the client in solving the following problem: Networked devices are delivered mis-cabled unexpectedly, and a way to prioritize alerts based on severity is needed. RedAlert builds a priority queue of these devices and alerts the user about the highest priority device until there are no more nodes left in the queue. A specific alert is defined for each of three severity levels\'97Blue, Yellow, and Red. Then, the user is prompted for action regarding the alert. Based on this action the node is either cleared of its issue or ignored and put back into the priority queue. Finally, the program should keep track of how much time has passed since the device was first identified as having a problem, which can be represented by loop cycles, with additional time added to nodes that are explicitly ignored by the user. In this implementation, the age is a factor into the priority of each node through overloaded operators.\
+    Input data is expected in the following format: 
+\f2\i NodeName status priority
+\f1\i0 . The node must have a problem (status equals 
+\f2\i true
+\f1\i0  or 1) in order to be enqueued. For example, the input data below would enqueue one new node with the lowest priority, and another new node with highest priority.\
+        \
+        Chicago05 1 0\
+        Salem02 1 2\
+\
+    Then, when the driver runs, it should output:\
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs18 \cf2 There are 2 unhealthy nodes.\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf2 Red Alert!!!\
+Name: Salem02\
+Priority: 2\
+Age: 1\
+\
+What to do with node in alert?\
+0: ignore\
+1: fix\
+2: stop polling\
+\pard\pardeftab720\partightenfactor0
+\cf3 1\cf2 \
+fixed\
+\
+There are 1 unhealthy nodes.\
+Blue Alert!\
+Name: Chicago05\
+Priority: 0\
+Age: 2\
+\
+What to do with node in alert?\
+0: ignore\
+1: fix\
+2: stop polling\
+\cf3 1\cf2 \
+fixed\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf2 \
+\
+    Evaluation of Expectations:\
+        Successfully alerted the user differently based on severity of problem. Also effectively reminded user if problems were ignored\
+        However, age should be more of a factor and queue more dynamic. When the age is increased, the nodes are not re-sorted. One improvement could be to regularly re-sort the queue so that nodes do not age forever/are never served.\
+        Program will consume new nodes in batches on a regular schedule, and the value of their priority and status will be unknown initially. Due to time constraints, this program was limited to fixed input data.\
+\
+\
+    Explorations:\
+        What to do with the node after it is fixed? Does it go back into a BST or database?\
+        How do nodes enter the BST or program initially?}
