@@ -13,16 +13,31 @@
 class Poller: public PQType<Node>{
 public: Poller(int);
   int getNumNodes() const;
+  // Function: return number of nodes within the data structure
   void getCurrentNode(Node&);
+  // Function: sets reference parameter to data member currentNode
+  // Pre: currentNode is initialized
   void setCurrentNode(Node&);
+  // Function: sets data member currentNode to Node reference parameter
+  // Pre: currentNode is initialized
   void addNode(Node&);
+  // Function: calls PQType member function enqueue and adds a Node data type to the data structure.
+  //           increments numNodes data member by one
+  // Pre: Node is initialized
+  // Post: Data structure has an additional node and is sorted.
   void removeNode(Node& n);
+  //Function: call PQType member function dequeu and removes the topmost node in the data structure and assigns it 
+  //          to the Node reference parameter. 
+  //          decrements numNodes by one. 
+  //          Sets current node to node that is to be removed
+  // Pre: Node is initialized
+  // Post: Data structure has top node removed and is re-sorted.  currentNode set to dequed node.
   bool CheckNode();
   // Function: Check link status of highest priority (next) node
   // Pre: currentNode is initialized
   // Post: function value is value of currentNode's data member, down;
   void SendAlert();
-  // Function: Check node and print alert based on priority
+  // Function: Check node and print alert based on priority. Calls CheckNode functions
   // Pre: Node is initialized
   // Post: Alert and Node data printed to screen
   void AgeNodes();
@@ -30,8 +45,8 @@ public: Poller(int);
   // Pre: PQType has function AgeItems defined for incresaing Node age value
   // Post: Every node in PQ has age increased by 1
 private:
-  int numNodes;
-  Node currentNode;
+  int numNodes;  //number of nodes within data structure
+  Node currentNode;  //node be manipulated currently by the program
 };
 
 
