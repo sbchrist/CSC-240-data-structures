@@ -7,6 +7,10 @@
 #ifndef NODETYPE_H
 #define NODETYPE_H
 
+
+#include <string>
+#include <iostream>
+using namespace std;
 class Node
 {
 public:
