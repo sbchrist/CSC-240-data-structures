@@ -3,6 +3,7 @@
 // Author      : Alan Angell
 // Version     : 05/13/2021
 // License     : Only for CSC240 Oakton College
+
 //============================================================================
 #ifndef POLLERTYPE_H
 #define POLLERTYPE_H
@@ -17,6 +18,7 @@ public: Poller(int);
   void setCurrentNode(Node&);
   void addNode(Node&);
   void removeNode(Node& n);
+
   bool CheckNode();
   // Function: Check link status of highest priority (next) node
   // Pre: currentNode is initialized
@@ -73,6 +75,7 @@ bool Poller::CheckNode(){
 }
 
 void Poller::SendAlert(){
+
   if (CheckNode()){
     string sev[3] = {"Blue Alert!", "Yellow Alert!!", "Red Alert!!!"};
     int p = currentNode.getPriority();
@@ -86,6 +89,7 @@ void Poller::AgeNodes(){
 }
 
 void Poller::PollNodes(){
+
 
 }
 

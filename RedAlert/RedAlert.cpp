@@ -3,6 +3,7 @@
 // Author      : Alan Angell
 // Version     : 05/13/2021
 // License     : Only for CSC240 Oakton College
+
 //============================================================================
 #include <iostream>
 #include <fstream>
@@ -13,6 +14,7 @@ using namespace std;
 const int MAX_SERVERS = 1000;
 
 int main() {
+
 	ifstream inFile;
 	inFile.open("inData.txt");
 	string nodeName;
@@ -62,6 +64,7 @@ int main() {
 		//       working while waiting for user or new nodes
 		}
 	}
+
   inFile.close();
 	return 0;
 }
