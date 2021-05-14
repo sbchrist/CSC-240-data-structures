@@ -23,14 +23,14 @@ public: Poller(int);
   void addNode(Node&);
   // Function: calls PQType member function enqueue and adds a Node data type to the data structure.
   //           increments numNodes data member by one
-  // Pre: Node is initialized
+  // Pre: Node is initialized. PriorityQueue list is initialized and not full
   // Post: Data structure has an additional node and is sorted.
   void removeNode(Node& n);
   //Function: call PQType member function dequeu and removes the topmost node in the data structure and assigns it 
   //          to the Node reference parameter. 
   //          decrements numNodes by one. 
   //          Sets current node to node that is to be removed
-  // Pre: Node is initialized
+  // Pre: Node is initialized. PriorityQueue list is initialized and not empty.
   // Post: Data structure has top node removed and is re-sorted.  currentNode set to dequed node.
   bool CheckNode();
   // Function: Check link status of highest priority (next) node
