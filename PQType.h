@@ -1,12 +1,12 @@
 #ifndef PQTYPE_H
 #define PQTYPE_H
-// Definition of class PQType, which represents the Priority Queue ADT
 class FullPQ{};
 class EmptyPQ{};
 #include <iostream>
 #include "Heap.h"
 using namespace std;
-#define MAX_ITEMS 10
+#define MAX_ITEMS 100
+
 template<class ItemType>
 class PQType
 {
@@ -69,18 +69,15 @@ PQType<ItemType>::PQType(int max)
 
 template<class ItemType>
 PQType<ItemType> PQType<ItemType>::operator=(const PQType<ItemType>& rhs){
-	//assignment operator=
 	if(this == &rhs){
 		return *this;
 	}
 	else{
-		//delete old contents of this
 		delete [] items.elements;
 		length = 0;
 		maxItems = rhs.maxItems;
 		items.elements = new ItemType[rhs.maxItems];
 
-		//copy new contents over to this from rhs
 		int count = 0;
 		while(count < rhs.length){
 			items.elements[count] = rhs.items.elements[count];
@@ -153,7 +150,7 @@ void PQType<ItemType>::AgeItems(){
 template <class ItemPQ>
 ostream& operator<<(ostream& out, const PQType<ItemPQ>& pq){
 	for(int i = 0; i < pq.length; i++){
-		out << pq.items.elements[i] << endl;
+    out << pq.items.elements[i];
 	}
 	return out;
 }

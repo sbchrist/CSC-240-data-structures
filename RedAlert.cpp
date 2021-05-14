@@ -3,18 +3,15 @@
 // Author      : Alan Angell
 // Version     : 05/13/2021
 // License     : Only for CSC240 Oakton College
-
 //============================================================================
 #include <iostream>
 #include <fstream>
 #include "Poller.h"
-#include "TreeType.h"
 using namespace std;
 
 const int MAX_SERVERS = 1000;
 
 int main() {
-
 	ifstream inFile;
 	inFile.open("inData.txt");
 	string nodeName;
@@ -22,10 +19,11 @@ int main() {
 	int priorityNode;
 	Poller cluster(MAX_SERVERS);
 
+  inFile >> nodeName >> isDown >> priorityNode;
   while (inFile){
-		inFile >> nodeName >> isDown >> priorityNode;
 		Node tmp(nodeName, isDown, priorityNode);
 		cluster.addNode(tmp);
+		inFile >> nodeName >> isDown >> priorityNode;
 	}
 
 	cout << "RedAlert simulation." << endl << endl;
@@ -60,11 +58,16 @@ int main() {
 			}
 			// How to make AgeNodes act more directly on Heap elements?
       cluster.AgeNodes();
+		}
+	  else{
+	    cout << endl << "All alerts clear!" << endl;
+			cout << "1: resume polling" << endl;
+			cout << "2: quit" << endl;
+			cin >> answer;
+	  }
 		// ToDo: Noussair wants to add parallelsim where the poller continues
 		//       working while waiting for user or new nodes
-		}
 	}
-
   inFile.close();
 	return 0;
 }
