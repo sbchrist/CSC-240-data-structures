@@ -9,10 +9,19 @@ template<class ItemType>
 struct HeapType
 {
   void ReheapDown(int root, int bottom);
+  // Function: Compares and swaps items
+  // Pre: list is initialed
+  // Post: Heap property is resorted.
   void ReheapUp(int root, int bottom);
+  // Function: Compares and swaps items
+  // Pre: list is initialed
+  // Post: Heap property is resorted.
   void HeapSort(int numValues);
+  // Function: calls reheapup and reheapdown and properly returns the index value of the root and its children nodes
+  // Pre: list is initilized and not empty
+  // Post: properly sorted list 
   void ReheapDown(ItemType elements[], int root, int bottom);
-  ItemType* elements;
+  ItemType* elements; //external pointer to list of elements
 };
 
 template <class ItemType>

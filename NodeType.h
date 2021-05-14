@@ -78,6 +78,8 @@ Node::Node(string n, bool d = false, int p = 0, int a = 0) {
 }
 
 int Node::getAge() const {
+    // Post: Function value = age
+
   return age;
 }
 

@@ -20,6 +20,7 @@ public: Poller(int);
   void setCurrentNode(Node&);
   // Function: sets data member currentNode to Node reference parameter
   // Pre: currentNode is initialized
+  // Post: data member currentNode seet to reference parameter
   void addNode(Node&);
   // Function: calls PQType member function enqueue and adds a Node data type to the data structure.
   //           increments numNodes data member by one
@@ -67,21 +68,29 @@ void Poller::setCurrentNode(Node& n){
 }
 
 void Poller::addNode(Node& n){
+  // Post: Data structure has an additional node and is sorted.
+
   PQType<Node>::Enqueue(n);
   numNodes++;
 }
 
 void Poller::removeNode(Node& n){
+  // Post: Data structure has top node removed and is re-sorted.  currentNode set to dequed node.
+
   PQType<Node>::Dequeue(n);
   setCurrentNode(n);
   numNodes--;
 }
 
 bool Poller::CheckNode(){
+  // Post: function value is value of currentNode's data member, down;
+
   return currentNode.getStatus();
 }
 
 void Poller::SendAlert(){
+  // Post: Alert and Node data printed to screen
+
   if (CheckNode()){
     string sev[3] = {"Blue Alert!", "Yellow Alert!!", "Red Alert!!!"};
     int p = currentNode.getPriority();
@@ -91,6 +100,8 @@ void Poller::SendAlert(){
 }
 
 void Poller::AgeNodes(){
+  // Post: Every node in PQ has age increased by 1
+
   PQType<Node>::AgeItems();
 }
 
