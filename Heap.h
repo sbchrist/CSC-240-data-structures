@@ -21,6 +21,9 @@ struct HeapType
   // Pre: list is initilized and not empty
   // Post: properly sorted list 
   void ReheapDown(ItemType elements[], int root, int bottom);
+  // Function: Compares and swaps items
+  // Pre: list is initialed
+  // Post: Heap property is resorted.
   ItemType* elements; //external pointer to list of elements
 };
 
