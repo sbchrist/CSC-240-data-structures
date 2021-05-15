@@ -10,26 +10,31 @@
 #include "PQType.h"
 #include "NodeType.h"
 
-class Poller: public PQType<Node>{
-public: Poller(int);
+class Poller: public PQType<Node>{ // Inherit PQType
+public:
+  Poller(); // default constructor
+  Poller(int); // constructor with size param
   int getNumNodes() const;
   // Function: return number of nodes within the data structure
+  // Pre: Poller is initialized
+  // Post: function value is numNodes
   void getCurrentNode(Node&);
   // Function: sets reference parameter to data member currentNode
   // Pre: currentNode is initialized
+  // Post: Node parameter is the address of the currently active node
   void setCurrentNode(Node&);
   // Function: sets data member currentNode to Node reference parameter
   // Pre: currentNode is initialized
-  // Post: data member currentNode seet to reference parameter
+  // Post: data member currentNode set to reference parameter
   void addNode(Node&);
   // Function: calls PQType member function enqueue and adds a Node data type to the data structure.
   //           increments numNodes data member by one
   // Pre: Node is initialized. PriorityQueue list is initialized and not full
   // Post: Data structure has an additional node and is sorted.
   void removeNode(Node& n);
-  //Function: call PQType member function dequeu and removes the topmost node in the data structure and assigns it 
-  //          to the Node reference parameter. 
-  //          decrements numNodes by one. 
+  //Function: call PQType member function dequeue and removes the topmost node in the data structure and assigns it
+  //          to the Node reference parameter.
+  //          decrements numNodes by one.
   //          Sets current node to node that is to be removed
   // Pre: Node is initialized. PriorityQueue list is initialized and not empty.
   // Post: Data structure has top node removed and is re-sorted.  currentNode set to dequed node.
@@ -51,6 +56,10 @@ private:
 };
 
 
+Poller::Poller() : PQType<Node>(){
+  numNodes = 0;
+}
+
 Poller::Poller(int size) : PQType<Node>(size){
   numNodes = 0;
 }
@@ -68,29 +77,21 @@ void Poller::setCurrentNode(Node& n){
 }
 
 void Poller::addNode(Node& n){
-  // Post: Data structure has an additional node and is sorted.
-
   PQType<Node>::Enqueue(n);
   numNodes++;
 }
 
 void Poller::removeNode(Node& n){
-  // Post: Data structure has top node removed and is re-sorted.  currentNode set to dequed node.
-
   PQType<Node>::Dequeue(n);
   setCurrentNode(n);
   numNodes--;
 }
 
 bool Poller::CheckNode(){
-  // Post: function value is value of currentNode's data member, down;
-
   return currentNode.getStatus();
 }
 
 void Poller::SendAlert(){
-  // Post: Alert and Node data printed to screen
-
   if (CheckNode()){
     string sev[3] = {"Blue Alert!", "Yellow Alert!!", "Red Alert!!!"};
     int p = currentNode.getPriority();
@@ -100,8 +101,6 @@ void Poller::SendAlert(){
 }
 
 void Poller::AgeNodes(){
-  // Post: Every node in PQ has age increased by 1
-
   PQType<Node>::AgeItems();
 }
 

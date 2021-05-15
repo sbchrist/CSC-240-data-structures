@@ -17,12 +17,12 @@ public:
   Node(); // class default constructor
   Node(string, bool, int, int); // class cosntructor
   int getAge() const;
-  // Function:  determines age of Node 
+  // Function:  determines age of Node
   // Pre: Node has been initialized
   // Post: Function value = age
   void decrementAge();
   // Function:  decrements age data member of Node
-  // Pre : Node has been initialized 
+  // Pre : Node has been initialized
   // Post: Node age--
   void incrementAge();
   // Function: increments age data member of Node
@@ -38,7 +38,8 @@ public:
   // Post: function value = priority
   void setLink(bool status);
   // Function: sets the priority data member to status
-  // Post: member variable down is set to status parameter
+  // Pre: down data member initialized
+  // Post: member variable down is set to value of status
   friend ostream& operator<<(ostream& out, const Node& j);
   // Function:  streaming friends function which accepos a stream vriable and node objects as parameters
   // Pre: Node and data members name, age, and priority are initialized
@@ -46,7 +47,7 @@ public:
   bool operator<(Node otherNode);
   // Function: compares priority and age value to otherNode parameter
   // Pre: Both nodes are initialized
-  // Post: function value = bool based on age and priority 
+  // Post: function value = bool based on age and priority
   bool operator>(Node otherNode);
   // Function: compares priority and age value to otherNode parameter
   // Pre: Both nodes are initialized
@@ -58,12 +59,12 @@ public:
   bool operator<=(Node otherNode);
   // Function: compares priority and age value to otherNode parameter, taking into account nodes with equal priorities
   // Pre: Both nodes are initialized
-  // Post: function value = bool based on age and priority, 
+  // Post: function value = bool based on age and priority,
 private:
-  string name;
-  int age;
-  int priority;
-  bool down;
+  string name;  // node name
+  int age;  // how long node has been in queue
+  int priority;  // severity of alert
+  bool down;  // if node has problem
 };
 
 
@@ -82,8 +83,6 @@ Node::Node(string n, bool d = false, int p = 0, int a = 0) {
 }
 
 int Node::getAge() const {
-    // Post: Function value = age
-
   return age;
 }
 

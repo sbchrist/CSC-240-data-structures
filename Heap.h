@@ -19,7 +19,7 @@ struct HeapType
   void HeapSort(int numValues);
   // Function: calls reheapup and reheapdown and properly returns the index value of the root and its children nodes
   // Pre: list is initilized and not empty
-  // Post: properly sorted list 
+  // Post: properly sorted list
   void ReheapDown(ItemType elements[], int root, int bottom);
   // Function: Compares and swaps items
   // Pre: list is initialed
@@ -38,7 +38,6 @@ void Swap(ItemType& one, ItemType& two)
 
 template<class ItemType>
 void HeapType<ItemType>::ReheapUp(int root, int bottom)
-// Post: Heap property is restored.
 {
   int parent;
 
@@ -54,7 +53,6 @@ void HeapType<ItemType>::ReheapUp(int root, int bottom)
 }
 template<class ItemType>
 void HeapType<ItemType>::ReheapDown(int root, int bottom)
-// Post: Heap property is restored.
 {
   int maxChild;
   int rightChild;
@@ -83,8 +81,6 @@ void HeapType<ItemType>::ReheapDown(int root, int bottom)
 
 template<class ItemType>
 void HeapType<ItemType>::HeapSort(int numValues)
-// Pre:  Struct HeapType is available.
-// Post: The elements in the array values are sorted by key.
 {
   int index;
 
@@ -100,7 +96,6 @@ void HeapType<ItemType>::HeapSort(int numValues)
 
 template<class ItemType>
 void HeapType<ItemType>::ReheapDown(ItemType elements[], int root, int bottom)
-// Post: Heap property is restored.
 {
   int maxChild;
   int rightChild;
